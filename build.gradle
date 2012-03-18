@@ -1,0 +1,51 @@
+def langs = ['java', 'groovy']
+
+apply plugin : 'idea'
+langs.each {
+    apply plugin : it
+}
+
+sourceCompatibility = 1.6
+targetCompatibility = 1.6
+
+group = 'org.mikeneck.guice'
+version = '1.0.0-SNAPSHOT'
+
+repositories {
+    mavenCentral ()
+}
+
+dependencies {
+    compile 'com.google.code.guice:guice:1.0'
+    testCompile ('junit:junit:4.10') {
+        exclude module : 'org.hamcrest:hamcrest'
+    }
+    testCompile 'org.hamcrest:hamcrest-library:1.2.1'
+    groovy 'org.codehaus.groovy:groovy:1.8.6'
+}
+
+def encoding = { it.encoding = 'UTF-8'}
+
+def makeStructure = {
+    def dir = []
+    sourceSets.each { src ->
+        langs.each { lang ->
+            dir << "src/${src.name}/${lang}"
+            dir << "src/${src.name}/${lang}/${project.properties.group.replace('.','/')}"
+        }
+        dir << "src/${src.name}/resources"
+    }
+    dir.each { 
+        println it
+        ant.mkdir(dir : it)
+    }
+}
+
+tasks.withType (AbstractCompile).each {
+    encoding it.options
+}
+
+tasks.ideaModule {
+    doFirst makeStructure
+}
+
