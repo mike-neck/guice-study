@@ -17,6 +17,7 @@ repositories {
 
 dependencies {
     compile 'com.google.code.guice:guice:1.0'
+    compile 'commons-lang:commons-lang:2.6'
     testCompile ('junit:junit:4.10') {
         exclude module : 'org.hamcrest:hamcrest'
     }
