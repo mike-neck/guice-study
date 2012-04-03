@@ -2,6 +2,7 @@ package org.mikeneck.guice.module;
 
 import com.google.inject.Inject;
 import com.google.inject.name.Named;
+import org.mikeneck.guice.model.Setting;
 
 /**
  * @author: mike
@@ -12,6 +13,14 @@ public class ConcertHall {
     @Inject
     @Named("capacity")
     private int capacity;
+
+    @Inject
+    @Named("type")
+    private Class<?> type;
+
+    @Inject
+    @Named("setting")
+    private Setting setting;
 
     @Override
     public String toString() {
