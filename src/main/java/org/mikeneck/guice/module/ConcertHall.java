@@ -5,8 +5,8 @@ import com.google.inject.name.Named;
 import org.mikeneck.guice.model.Setting;
 
 /**
- * @author: mike
- * @since: 12/04/04
+ * @author : mike
+ * @since : 12/04/04
  */
 public class ConcertHall {
 
@@ -30,5 +30,13 @@ public class ConcertHall {
 
     public int getCapacity() {
         return capacity;
+    }
+
+    public Setting getSetting() {
+        return setting;
+    }
+
+    public Class<?> getType() {
+        return type;
     }
 }
